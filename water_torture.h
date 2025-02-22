@@ -200,11 +200,23 @@ private:
     return (rand() % 256);
   }
 
+  // Array of colors to cycle through
+  static const rgb droplet_colors[] = {
+      rgb(255, 255, 0),     // Yellow
+      rgb(255, 0, 255),     // Purple (richer purple)
+      rgb(128, 128, 128),   // Gray
+      rgb(255, 255, 255),   // White
+      rgb(0, 0, 255)      // Blue
+  };
+  static const uint8_t num_droplet_colors = sizeof(droplet_colors) / sizeof(droplet_colors[0]);
+  static uint8_t current_color_index = 0; // Keep track of the current color
+
   void create_random_droplet( droplet &d)
   {
     d = droplet(
-        rgb(255, 255, 255), // White color, maximum brightness - MODIFIED LINE
+        droplet_colors[current_color_index], // Use color from the array
         5);
+    current_color_index = (current_color_index + 1) % num_droplet_colors; // Cycle to the next color
   }
 
 }
