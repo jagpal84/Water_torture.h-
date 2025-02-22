@@ -4,7 +4,7 @@
 #include <Adafruit_NeoPixel.h>
 #include <string.h>
 
-namespace 
+namespace
 {
   using ws2811::rgb;
 
@@ -97,7 +97,7 @@ namespace
         uint8_t last = max_pos;
         uint8_t pos = position8;
         uint8_t pos1 = position8+1;
-        
+
         if (reverse)
         {
           last = 0;
@@ -203,11 +203,8 @@ private:
   void create_random_droplet( droplet &d)
   {
     d = droplet(
-        rgb(
-            mult( 100 ,random_scale()),
-            mult( 100, random_scale()),
-            mult(255, random_scale())
-            ), 5);
+        rgb(255, 255, 255), // White color, maximum brightness - MODIFIED LINE
+        5);
   }
 
 }
@@ -215,14 +212,14 @@ private:
 class WaterTorture
 {
   public:
-  
+
   WaterTorture( Adafruit_NeoPixel *strip)
   {
     this->strip = strip;
       current_droplet = 0; // index of the next droplet to be created
       droplet_pause = 1; // how long to wait for the next one
   }
-  
+
 void animate (bool reverse)
   {
         if (droplet_pause)
@@ -253,7 +250,7 @@ void animate (bool reverse)
 //    leds++;
 //  }
   }
- 
+
 private:
       Adafruit_NeoPixel *strip;
       static const uint8_t droplet_count = 4;
